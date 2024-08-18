@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Line Charts Grid</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .chart-wrapper {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        canvas {
+            width: 100% !important;
+            height: 400px !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dailys Operations Details</h1>
+    <div class="charts-container" id="charts-container">
+        <!-- Charts will be inserted here by JavaScript -->
+    </div>
+
+    <script>
+        // URL of the CSV file
+        var csvUrl = 'hardness.csv'; // Replace with your CSV file path
+
+        // Fetch and parse the CSV file
+		Papa.parse(csvUrl, {
+			download: true,
+			header: true,
+			complete: function(results) {
+				// Pick only the last 30 entries
+				const data = results.data.slice(-30); // Take the last 30 rows
+
+				if (data.length === 0) {
+					console.error('No data available in the CSV file.');
+					return;
+				}
+
+				// Get the labels from the Date column
+				const labels = data.map(row => row['Date']); // Adjust 'Date' to your CSV column name
+
+				// Get column names excluding 'Date'
+				var columns = Object.keys(data[0]).filter(column => column !== 'Date');
+				columns = columns.filter(element => element !== "")
+
+				
+				// Create a chart for each column except 'Date'
+				const chartsContainer = document.getElementById('charts-container');
+				columns.forEach(column => {
+					
+					const values = data.map(row => parseFloat(row[column]));
+
+					// Create a canvas element for each chart
+					const canvas = document.createElement('canvas');
+					canvas.classList.add('chart');
+					chartsContainer.appendChild(canvas);
+					console.log(values)
+					// Create a line chart
+					const ctx = canvas.getContext('2d');
+					new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: labels,
+							datasets: [{
+								label: column, // Use column name as label
+								data: values,
+								borderColor: 'rgba(255, 99, 132, 0.2)',
+								backgroundColor: 'rgba(75, 192, 192, 0.2)',
+								fill: true,
+							}]
+						},
+						options: {
+							responsive: true,
+							scales: {
+								x: {
+									beginAtZero: true,
+									title: {
+										display: true,
+										text: 'Date'
+									}
+								},
+								y: {
+									beginAtZero: true,
+									title: {
+										display: true,
+										text: column
+									}
+								}
+							}
+						}
+					});
+				});
+			}
+		});
+
+		csvUrl = 'ops_details.csv'; // Replace with your CSV file path
+
+        // Fetch and parse the CSV file
+		Papa.parse(csvUrl, {
+			download: true,
+			header: true,
+			complete: function(results) {
+				// Pick only the last 30 entries
+				const data = results.data.slice(-30); // Take the last 30 rows
+
+				if (data.length === 0) {
+					console.error('No data available in the CSV file.');
+					return;
+				}
+
+				// Get the labels from the Date column
+				const labels = data.map(row => row['Date']); // Adjust 'Date' to your CSV column name
+
+				// Get column names excluding 'Date'
+				var columns = Object.keys(data[0]).filter(column => column !== 'Date');
+				columns = columns.filter(element => element !== "")
+  
+				// Create a chart for each column except 'Date'
+				const chartsContainer = document.getElementById('charts-container');
+				columns.forEach(column => {
+					
+					const values = data.map(row => parseFloat(row[column]));
+					console.log(values)
+					// Create a canvas element for each chart
+					const canvas = document.createElement('canvas');
+					canvas.classList.add('chart');
+					chartsContainer.appendChild(canvas);
+
+					// Create a line chart
+					const ctx = canvas.getContext('2d');
+					new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: labels,
+							datasets: [{
+								label: column, // Use column name as label
+								data: values,
+								borderColor: 'rgba(255, 99, 132, 0.2)',
+								backgroundColor: 'rgba(75, 192, 192, 0.2)',
+								fill: true,
+							}]
+						},
+						options: {
+							responsive: true,
+							scales: {
+								x: {
+									beginAtZero: true,
+									title: {
+										display: true,
+										text: 'Date'
+									}
+								},
+								y: {
+									beginAtZero: true,
+									title: {
+										display: true,
+										text: column
+									}
+								}
+							}
+						}
+					});
+				});
+			}
+		});
+		
+    </script>
+</body>
+</html>
