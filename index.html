@@ -17,6 +17,26 @@
             height: 100vh;
 
         }
+		.header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 1900px;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 150px; /* Adjust width of the logo */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .heading {
+            font-size: 2em;
+            color: #333;
+            margin: 10px 0;
+        }
         .gallery-container {
             width: 90%;
             max-width: 1200px;
@@ -59,9 +79,14 @@
             border-top: 2px solid #fff;
             box-sizing: border-box;
         }
+		
     </style>
 </head>
 <body>
+	<div class="header">
+        <img src="MC-Logo.png" alt="Logo" class="logo"> <!-- Replace with your logo path -->
+        <div class="heading">Ops and Hardness Details from latest 30 days data</div>
+    </div>
     <div class="gallery-container">
         <div class="gallery">
             <!-- Gallery items go here -->
