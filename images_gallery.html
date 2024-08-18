@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+			overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+        .gallery-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            border-top: 2px solid #fff;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery">
+            <!-- Gallery items go here -->
+            <div class="gallery-item">
+                <img src="Final Tank Hardness Report.png" alt="Image 1">
+                
+            </div>
+            <div class="gallery-item">
+                <img src="Raw Tank Hardness Report.png" alt="Image 2">
+			</div>
+		</div>
+		<div class="gallery">
+			<div class="gallery-item">
+                <img src="DG200 Units Consumed.png" alt="Image 1">
+                
+            </div>
+			<div class="gallery-item">
+                <img src="DG250 Units Consumed.png" alt="Image 1">
+                
+            </div>
+		</div>
+		<div class="gallery">
+			<div class="gallery-item">
+                <img src="Cauvery Water Received.png" alt="Image 1">
+                
+            </div>
+			<div class="gallery-item">
+                <img src="WTP Water Received.png" alt="Image 1">
+                
+            </div>
+		</div>
+    </div>
+</body>
+</html>
