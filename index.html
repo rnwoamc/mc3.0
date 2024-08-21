@@ -6,6 +6,7 @@
     <title>RNW Daily Ops Details</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <script src="app.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,10 +34,29 @@
             width: 100% !important;
             height: 400px !important;
         }
+	table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 50px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Increase the width of the first column */
+        td:first-child, th:first-child {
+            width: 500px; /* Adjust this value as needed */
+        }	
     </style>
 </head>
 <body>
     <h1>NW Dailys Operations Details</h1>
+    <div id="tableContainer"></div>
     <div class="charts-container" id="charts-container">
         <!-- Charts will be inserted here by JavaScript -->
     </div>
@@ -76,7 +96,7 @@
 					const canvas = document.createElement('canvas');
 					canvas.classList.add('chart');
 					chartsContainer.appendChild(canvas);
-					console.log(values)
+					//console.log(values)
 					// Create a line chart
 					const ctx = canvas.getContext('2d');
 					new Chart(ctx, {
@@ -142,7 +162,7 @@
 				columns.forEach(column => {
 					
 					const values = data.map(row => parseFloat(row[column]));
-					console.log(values)
+					//console.log(values)
 					// Create a canvas element for each chart
 					const canvas = document.createElement('canvas');
 					canvas.classList.add('chart');
@@ -157,7 +177,7 @@
 							datasets: [{
 								label: column, // Use column name as label
 								data: values,
-								borderColor: 'rgba(255, 99, 132, 0.2)',
+								borderColor: 'rgba(39,50,245,1)',
 								backgroundColor: 'rgba(75, 192, 192, 0.2)',
 								fill: true,
 							}]
@@ -185,8 +205,8 @@
 				});
 			}
 		});
-		
     </script>
+
 </body>
 </html>
 
